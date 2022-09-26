@@ -42,7 +42,7 @@ export default function Whiteboard() {
 
   return (
     <div className="App">
-      <h1> Excalidraw Example</h1>
+      <h1> Whiteboard</h1>
       <div className="button-wrapper">
         <button className="update-scene" onClick={updateScene}>
           Update Scene
