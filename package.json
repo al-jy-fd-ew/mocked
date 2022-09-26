@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/al-jy-fd-ew/mock-interview-app#readme",
   "dependencies": {
+    "@excalidraw/excalidraw": "^0.12.0",
     "babel": "^6.23.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",

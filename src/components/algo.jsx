@@ -4,8 +4,8 @@ import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
 
-const AlgoSection = () => /* const [code, setCode] = React.useState(*/ /*   ''*/ /* );*/ (
-  <div id='algo-section'>
+const AlgoSection = () => (
+  <div className='sections'>
     <h3>Question</h3>
     <p>Given an array of integers nums and an integer target, return indices of the two numbers such
       that they add up to target. You may assume that each input would have exactly one solution, and
