@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const sampleQuestions = [
   'Tell me about a time when you performed well under enormous pressure.',
@@ -12,7 +12,7 @@ function getRandomInt() {
   return Math.floor(Math.random() * 5);
 }
 
-const Behavioral = () => {
+const BehavioralSection = () => {
   return (
 
     <div id="behavioral">
@@ -26,7 +26,7 @@ const Behavioral = () => {
         <input type='submit' value="Go to the Next Section"></input>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Behavioral;
+export default BehavioralSection;
