@@ -2,7 +2,7 @@ import React from 'react';
 
 const sampleQuestions = [
   'Tell me about a time when you performed well under enormous pressure.',
-  'Tell me about a time you had a conflict at work',
+  'Tell me about a time you had a conflict at work.',
   'Can you detail a mistake you made and how you reacted to it?',
   'Have you ever had a disagreement with an immediate supervisor?',
   'Describe a time when you went above and beyond.',
@@ -15,16 +15,18 @@ function getRandomInt() {
 const BehavioralSection = () => {
   return (
 
-    <div id="behavioral">
+    <div className='sections'>
       <h1>Mock Interview App</h1>
       {/* {(isLoggedIn === true) && <Navigate to="/" replace={true} />} */}
       <h3>Behavioral Question</h3>
+      å<p>{sampleQuestions[getRandomInt()]}</p>
       <form onSubmit={(e) => verifyUser(e)}>
-        <p>{sampleQuestions[getRandomInt()]}</p>
         <textarea name="answer" type="text" placeholder="Type out your response here..." style={{height:400, width:600}}></textarea>
+        {/* recorded response? */}
         <br></br>
-        <input type='submit' value="Go to the Next Section"></input>
+        {/* <input type='submit' value="Go to the Next Section"></input> */}
       </form>
+      <button className='next-button'>Go to next section</button>å
     </div>
   );
 };
