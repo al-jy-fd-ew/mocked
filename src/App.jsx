@@ -1,10 +1,10 @@
 import React from 'react';
-import './src/styling.scss';
+import '../src/styling.scss';
 
 const App = () => (
-    <div>
+  <div>
         Hello
-    </div>
+  </div>
 );
 
 export default App;
