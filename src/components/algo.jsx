@@ -32,7 +32,7 @@ const AlgoSection = () => (
         showLineNumbers: true,
         tabSize: 4,
       }} />
-    <button>Go to next section</button>
+    <button className='next-button'>Go to next section</button>
   </div>
 );
 

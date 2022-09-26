@@ -31,10 +31,13 @@
 }
 
 .excalidraw-wrapper {
-    height: 800px;
+    // change height and width of the excalidraw box
+    height: 80vh;
+    width: 80vw;
     margin: 50px;
     position: relative;
     overflow: hidden;
+    border: 1px solid black;
 }
 
 :root[dir="ltr"] .excalidraw .layer-ui__wrapper .zen-mode-transition.App-menu_bottom--transition-left {
