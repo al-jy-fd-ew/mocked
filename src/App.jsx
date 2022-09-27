@@ -7,6 +7,15 @@ import AlgoSection from './components/algo.jsx';
 import SystemDesignSection from './components/system-design.jsx';
 
 const App = () => (
+  //userId state, pass to each section
+  // userIdState = render initial section
+  // 2x boolean flag state = render additional sections as user progresses
+
+  // init userIDstate to NaN;
+  // once logged in, update userID state
+  // when userId state is valid, conditionally render first section
+  // inside first section, clicking "next" invokes a handler here, 
+
   <div>
     <Login />
     <Signup />

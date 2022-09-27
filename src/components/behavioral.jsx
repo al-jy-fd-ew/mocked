@@ -11,10 +11,14 @@ const sampleQuestions = [
 function getRandomInt() {
   return Math.floor(Math.random() * 5);
 }
+// useEffect to retrieve question
+
+// onSubmit -> post request to server
+
+
 
 const BehavioralSection = () => {
   return (
-
     <div id="behavioral">
       <h1>Mock Interview App</h1>
       {/* {(isLoggedIn === true) && <Navigate to="/" replace={true} />} */}

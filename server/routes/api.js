@@ -7,7 +7,11 @@ router.post('/login', )
 // create/signup user
 // sign-in
 
-router.post('/get-question', questionController.getQuestion, (req, res) => {
+router.post('/get-question', questionController.getQuestion, questionController.returnRandomQuestion, (req, res) => {
+  return res.status(200).json(res.locals.question);
+});
+
+router.post('/reset-progress', questionController.resetProgress, questionController.returnRandomQuestion, (req, res) => {
   return res.status(200).json(res.locals.question);
 });
 

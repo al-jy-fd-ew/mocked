@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack serve --hot --open",
     "dev": "webpack serve --hot --open & nodemon server/server.js",
+    "server": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
