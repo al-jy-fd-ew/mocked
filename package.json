@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/al-jy-fd-ew/mock-interview-app#readme",
   "dependencies": {
+    "@excalidraw/excalidraw": "^0.12.0",
     "babel": "^6.23.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
@@ -29,7 +30,9 @@
     "path": "^0.12.7",
     "pg": "^8.8.0",
     "postgres": "^3.2.4",
+    "prismjs": "^1.29.0",
     "react": "^18.2.0",
+    "react-ace": "^10.1.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.1"
   },
