@@ -19,14 +19,14 @@ const BehavioralSection = () => {
       <h1>Mock Interview App</h1>
       {/* {(isLoggedIn === true) && <Navigate to="/" replace={true} />} */}
       <h3>Behavioral Question</h3>
-      å<p>{sampleQuestions[getRandomInt()]}</p>
+      <p>{sampleQuestions[getRandomInt()]}</p>
       <form onSubmit={(e) => verifyUser(e)}>
         <textarea name="answer" type="text" placeholder="Type out your response here..." style={{height:400, width:600}}></textarea>
         {/* recorded response? */}
         <br></br>
         {/* <input type='submit' value="Go to the Next Section"></input> */}
       </form>
-      <button className='next-button'>Go to next section</button>å
+      <button className='next-button'>Go to next section</button>
     </div>
   );
 };
