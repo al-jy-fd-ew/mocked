@@ -17,9 +17,9 @@ const App = () => (
   <div>
     <Login />
     <Signup />
-    <BehavioralSection />
+    {/* <BehavioralSection />
     <AlgoSection/>
-    <SystemDesignSection/>
+    <SystemDesignSection/> */}
   </div>
 );
 

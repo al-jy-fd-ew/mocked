@@ -1,23 +1,20 @@
-import React from "react";
+import React from 'react';
 
 const Login = () => {
   return (
 
-    <div id="login">
+    <div id='login'>
       <h1>Mock Interview App</h1>
-      {/* {(isLoggedIn === true) && <Navigate to="/" replace={true} />} */}
-      <label>Log In:</label>
-      <form onSubmit={(e) => verifyUser(e)}>
-        <input name="username" type="text" placeholder="Username"></input>
+      <h3>Log In</h3>
+      <form method='POST' action='/login'>
+        <input name='username' type='text' placeholder='Username'></input>
         <br></br>
-        <input name="password" type="text" placeholder="Password"></input>
+        <input name='password' type='password' placeholder='Password'></input>
         <br></br>
-        <input type='submit' value="Login"></input>
-      </form><br/><br/>
-      <label>Don't have an account? Sign up here:</label>
-      <form onSubmit={(e) => createUser(e)}>
-        <input type='submit' value="Create an account"></input>
+        <button type='submit'>Log In</button>
       </form>
+      <p>Don't have an account? Sign up here:</p>
+      
     </div>
   );
 };
