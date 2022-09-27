@@ -19,8 +19,6 @@ app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 // route to apiRouter
 app.use('/api', apiRouter);
 
-
-
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
 
 // global error handler
@@ -34,9 +32,6 @@ app.use((err, req, res, next) => {
   console.log('error obj is: ', errorObj);
   return res.status(errorObj.status).send(errorObj.msg);
 });
-
-
-
 
 
 app.listen(PORT, () => {

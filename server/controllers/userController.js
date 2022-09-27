@@ -61,13 +61,14 @@ userController.verifyUser = (req, res, next) => {
         // if the user IS in the database, check to see if they inputted the correct password
       } else {
         bcrypt.compare(password, response.rows[0].password)
-          .then((response) => {
+          .then((data) => {
             // return an error if the password is incorrect (response is falsey)
-            if (!response) {
+            if (!data) {
               return next(
                 { err: 'Incorrect password' }
               );
             }
+            res.cookie('user_id', response.rows[0]._id);
             // return next if the user successfully logged in
             console.log('User successfully logged in');
             return next();
