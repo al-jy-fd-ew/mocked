@@ -30,18 +30,7 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).send(errorObj.msg);
 });
 
-app.use(express.json()); // recognize incoming request as Json Object
-app.use(express.urlencoded({ extended: true })); // parse incoming string or array request
 
-app.use('/src', express.static(path.resolve(__dirname, '../src')));
-
-app.post('/signup', userController.createUser, (req, res) => {
-
-});
-
-app.post('/login', userController.verifyUser, (req, res) => {
-
-});
 
 
 

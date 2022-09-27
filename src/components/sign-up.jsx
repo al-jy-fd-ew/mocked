@@ -5,7 +5,7 @@ const Signup = () => {
     <div id='signup'>
       <h1>Mock Interview App</h1>
       <h3>Sign Up</h3>
-      <form method='POST' action='/signup'>
+      <form method='POST' action='/api/signup'>
         <input name='username' type='text' placeholder='Username'></input>
         <br></br>
         <input name='password' type='password' placeholder='Password'></input>
