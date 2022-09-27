@@ -1,22 +1,20 @@
 import React from 'react';
+// import { Link } from 'react-router-dom';
 
-const Login = () => {
+const Signup = () => {
   return (
-
-    <div id='login'>
+    <div id='signup'>
       <h1>Mock Interview App</h1>
-      <h3>Log In</h3>
-      <form method='POST' action='/api/login'>
+      <h3>Sign Up</h3>
+      <form method='POST' action='/api/signup'>
         <input name='username' type='text' placeholder='Username'></input>
         <br></br>
         <input name='password' type='password' placeholder='Password'></input>
         <br></br>
-        <button type='submit'>Log In</button>
+        <button type='submit'>Sign Up</button>
       </form>
-      <p>Don&apos;t have an account? Sign up here:</p>
-      
     </div>
   );
 };
 
-export default Login;
+export default Signup;
