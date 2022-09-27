@@ -1,13 +1,14 @@
 const path = require('path');
 const express = require('express');
-
 const dotenv = require('dotenv');
-dotenv.config();
+// require routers
+const apiRouter = require('./routes/api.js');
 
+dotenv.config();
 const PORT = 3000;
 const app = express();
 
-// Import controllers
+// Express middleware
 app.use(express.json()); // recognize incoming request as Json Object
 app.use(express.urlencoded({ extended: true })); // parse incoming string or array request
 
@@ -15,9 +16,8 @@ app.use(express.urlencoded({ extended: true })); // parse incoming string or arr
 app.use('/src', express.static(path.resolve(__dirname, '../src')));
 app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}...`);
-});
+// route to apiRouter
+app.use('/api', apiRouter);
 
 // global error handler
 app.use((err, req, res, next) => {
@@ -28,6 +28,10 @@ app.use((err, req, res, next) => {
   };
   const errorObj = Object.assign(defaultErr, err);
   return res.status(errorObj.status).send(errorObj.msg);
+});
+
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}...`);
 });
 
 module.exports = app;
