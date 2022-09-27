@@ -6,10 +6,10 @@ import 'ace-builds/src-noconflict/ext-beautify';
 
 const sampleQuestions = [
   'Given a sorted array, find a way to make a binary tree with minimal height.',
-  `Given a list of words, write a program to find the longest word made of other words in the list. Example: ['dog', 'cat', 'walker', 'dogwalker'] -> 'dogwalker'`,
+  'Given a list of words, write a program to find the longest word made of other words in the list. Example: [\'dog\', \'cat\', \'walker\', \'dogwalker\'] -> \'dogwalker\'',
   'You are given a sorted array and you want to find the number N. How do you do the search as quickly as possible?',
   'Implement a stack using queues as the underlying data structure.',
-  `Given two words (beginWord and endWord), and a dictionary's word list, find the length of shortest transformation sequence from beginWord to endWord, such that: 1.Only one letter can be changed at a time. 2.Each intermediate word must exist in the word list.`
+  'Given two words (beginWord and endWord), and a dictionary\'s word list, find the length of shortest transformation sequence from beginWord to endWord, such that: 1.Only one letter can be changed at a time. 2.Each intermediate word must exist in the word list.'
 ];
 
 function getRandomInt() {
