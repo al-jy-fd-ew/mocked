@@ -6,7 +6,11 @@ userController.createUser = (req, res, next) => {
   console.log('in userController.createUser');
 
   const { username, password } = req.body;
-  if (!username || !password) return next('Missing username or password in create user');
+
+  // if a field is missing, return an error
+  if (!username || !password) return next({
+    err: 'missing username or password in userController.createUser'
+  });
 
   const hash = bcrypt.hashSync(password, 10);
 
@@ -15,15 +19,15 @@ userController.createUser = (req, res, next) => {
     VALUES (DEFAULT, $1, $2) RETURNING _id;
   `;
 
+  // insert the new user into the database
   db.query(query, [username, hash])
-    .then(response => {
-      // not returning error if username already exists, but it isn't adding it
+    .then((response) => {
+      // in the future, do something with the new users id - TODO
       return next();
     })
     .catch(err => {
       return next({
         log: 'Express error handler caught unknown middleware error',
-        status: 400,
         message: {
           err: 'error in userController.createUser - issue with user creation',
         },
@@ -35,7 +39,11 @@ userController.verifyUser = (req, res, next) => {
   console.log('in userController.verifyUser');
 
   const { username, password } = req.body;
-  if (!username || !password) return next('Missing username or password in verify user');
+
+  // if a field is missing, return an error
+  if (!username || !password) return next(
+    { err: 'missing username or password in userController.verifyUser' }
+  );
 
   const query = `
     SELECT *
@@ -43,19 +51,25 @@ userController.verifyUser = (req, res, next) => {
     WHERE u.username = $1
   `;
 
+  // find the username in the database
   db.query(query, [username])
     .then((response) => {
+      // if the username is not in the database, redirect to sign up page
       if (response.rows.length === 0) {
         console.log('User does not exist in database.');
         res.redirect('/signup');
+        // if the user IS in the database, check to see if they inputted the correct password
       } else {
-        console.log('response rows is: ', response.rows);
         bcrypt.compare(password, response.rows[0].password)
           .then((response) => {
+            // return an error if the password is incorrect (response is falsey)
             if (!response) {
-              console.log('Incorrect password');
-              return next();
+              return next(
+                { err: 'Incorrect password' }
+              );
             }
+            // return next if the user successfully logged in
+            console.log('User successfully logged in');
             return next();
           });
       }

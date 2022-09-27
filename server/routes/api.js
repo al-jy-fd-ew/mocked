@@ -3,10 +3,12 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 
 router.post('/signup', userController.createUser, (req, res) => {
-  console.log('hello');
+  // after successful sign up, redirect to the login page
+  return res.status(200).redirect('/login');
 });
 
 router.post('/login', userController.verifyUser, (req, res) => {
+  // if the user successfully logs in, redirect to the home page
   return res.status(200).redirect('/behavioral');
 });
 
