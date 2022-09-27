@@ -15,7 +15,7 @@ INSERT INTO public.users_design_questions VALUES (1, 5);
 INSERT INTO public.users_design_questions VALUES (3, 7);
 INSERT INTO public.users_design_questions VALUES (2, 8);
 
-INSERT INTO public.user_behavioral_questions VALUES (1, 2);
-INSERT INTO public.user_behavioral_questions VALUES (2, 1);
-INSERT INTO public.user_behavioral_questions VALUES (2, 5);
-INSERT INTO public.user_behavioral_questions VALUES (3, 6);
+INSERT INTO public.users_behavioral_questions VALUES (1, 2);
+INSERT INTO public.users_behavioral_questions VALUES (2, 1);
+INSERT INTO public.users_behavioral_questions VALUES (2, 5);
+INSERT INTO public.users_behavioral_questions VALUES (3, 6);
