@@ -10,8 +10,6 @@ import {
 import Login from './pages/log-in.jsx';
 import Signup from './pages/sign-up.jsx';
 import Home from './pages/home.jsx';
-
-import { useEffect } from 'react';
 import { gapi } from 'gapi-script';
 
 const clientID = '795937344287-vrtte822003tg70ogjab4t0tucr9e87a.apps.googleusercontent.com';
