@@ -1,0 +1,68 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.sections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+        font-size: 25px;
+        font-size: 2vw;
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }
+
+    p {
+        font-size: 20px;
+        font-size: 1.5vw;
+        width: 80%;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .next-button {
+        margin-top: 40px;
+        height: 2.5vw;
+        font-size: 1.5vw;
+    }
+}
+
+.credentials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        p {
+            font-size: 14px;
+            margin: 0;
+            align-self: flex-start;
+        }
+    }
+
+    .username {
+        margin-bottom: 15px;
+    }
+
+    .submit {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    hr {
+        margin-top: 20px;
+        border-top: 0;
+        width: 20%;
+    }
+
+    #signInDiv {
+        margin-top: 20px;
+    }
+}
