@@ -12,7 +12,7 @@ SET row_security = off;
 CREATE TABLE public.users (
 	"_id" serial NOT NULL,
   "username" varchar NOT NULL,
-	"password" varchar NOT NULL, -- Not NOT NULL if implementing OAUTH
+	"password" varchar, -- Not NOT NULL if implementing OAUTH
   CONSTRAINT "user_pk" PRIMARY KEY ("_id"),
 	CONSTRAINT "username_unique" UNIQUE ("username") 
 ) WITH (

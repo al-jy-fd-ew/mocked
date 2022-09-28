@@ -24,8 +24,6 @@ userController.createUser = (req, res, next) => {
   // insert the new user into the database
   db.query(query, [username, hash])
     .then((response) => {
-      // console.log('in this block');
-      // in the future, do something with the new users id - TODO
       return next();
     })
     .catch(err => {
@@ -79,6 +77,49 @@ userController.verifyUser = (req, res, next) => {
           }).then(res => {
             return next();
           });
+      }
+    });
+
+};
+
+userController.authVerifyUser = (req, res, next) => {
+  console.log('in userController.authVerifyUser');
+
+  const { username } = req.body;
+
+
+  // query to see if username is already in database
+  const query1 = `
+  SELECT _id, username
+  FROM users
+  WHERE username = $1;`;
+
+  db.query(query1, [username])
+    .then((response) => {
+      if (response.rows[0] === undefined) {
+        const query2 = `
+        INSERT INTO users (_id, username)
+        VALUES (DEFAULT, $1) RETURNING _id;
+        `;
+
+        db.query(query2, [username])
+          .then((response) => {
+            console.log('valid username added to database');
+            console.log('response rows is: ', response.rows[0]);
+            res.cookie('user_id', response.rows[0]._id);
+            return next();
+          })
+          .catch(err => {
+            return next({
+              log: 'Express error handler caught unknown middleware error',
+              message: {
+                err: 'error in userController.authVerifyUser - issue with user creation',
+              },
+            });
+          });
+      } else {
+        res.cookie('user_id', response.rows[0]._id);
+        return next();
       }
     });
 };
