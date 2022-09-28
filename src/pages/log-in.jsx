@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Home from './home.jsx';
 
 const Login = () => {
   return (
@@ -17,6 +18,7 @@ const Login = () => {
       <Link to='/signup'>
         <button>Don&apos;t have an account? Sign up here.</button>
       </Link>
+      <Home />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 const db = require('../models/models.js');
 
+
 const questionController = {};
 
 // req body will have userId + type of question (string)
@@ -11,7 +12,9 @@ questionController.getQuestion = (req, res, next) => {
   // behavioral questions -> public.user_behavioral_questions
   // public.behavioral_questions (get filtered [] of questions)
   // error handling: if user has done all questions (empty [])
-  const { userId, questionType } = req.body;
+  console.log(req.body);
+  const { questionType } = req.body;
+  const { userId } = req.cookies;
   const query = `
     SELECT
     ${questionType}_questions._id,
@@ -51,7 +54,8 @@ questionController.returnRandomQuestion = (_req, res, next) => {
 };
 
 questionController.resetProgress = (req, _res, next) => {
-  const { userId, questionType } = req.body;
+  const { questionType } = req.body;
+  const { userId } = req.cookies;
   const tableName = `users_${questionType}_questions`;
   const query = `DELETE FROM ${tableName} WHERE user_id = ${userId}`;
   db.query(query)
@@ -64,7 +68,8 @@ questionController.resetProgress = (req, _res, next) => {
 
 questionController.markDone = (req, res, next) => {
   // questionType will be one of 'behavioral', 'algorithm' or 'design'
-  const { userId, questionType, questionId } = req.body;
+  const { questionType, questionId } = req.body;
+  const { userId } = req.cookies;
   const tableName = `users_${questionType}_questions`;
   const idValues = [userId, questionId];
   const query = `
