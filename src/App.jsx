@@ -1,20 +1,27 @@
 import React from 'react';
 import '../src/styling.scss';
-import Login from './components/log-in.jsx';
-import Signup from './components/sign-up.jsx';
-import BehavioralSection from './components/behavioral.jsx';
-import AlgoSection from './components/algo.jsx';
-import SystemDesignSection from './components/system-design.jsx';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+} from 'react-router-dom';
+import Login from './pages/log-in.jsx';
+import Signup from './pages/sign-up.jsx';
+import Home from './pages/home.jsx';
+
+
+
 
 const App = () => (
-  <div>
-    <Login />
-    <Signup />
-    <BehavioralSection />
-    {/* just appended everything to app for now to visualize how each section looks */}
-    <AlgoSection/>
-    <SystemDesignSection/>
-  </div>
+  <Router>
+    <Routes>
+      <Route path='/' element={<Login />}/>
+      <Route path='/signup' element={<Signup />}/>
+      <Route path='/home' element={<Home />}/>
+    </Routes>
+  </Router>
 );
 
 export default App;

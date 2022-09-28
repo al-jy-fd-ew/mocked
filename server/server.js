@@ -19,16 +19,20 @@ app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 // route to apiRouter
 app.use('/api', apiRouter);
 
+app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
+
 // global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 400,
-    message: { err: 'An error hath occurred!' },
+    message: { err: 'An error has occurred!' },
   };
-  const errorObj = Object.assign(defaultErr, err);
+  const errorObj = Object.assign({}, defaultErr, err);
+  console.log('error obj is: ', errorObj);
   return res.status(errorObj.status).send(errorObj.msg);
 });
+
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
