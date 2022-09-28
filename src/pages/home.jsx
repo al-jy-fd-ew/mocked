@@ -18,6 +18,7 @@ const Home = () => {
     if (currSection === 'reset') {
       setAlgo(false);
       setSysDesign(false);
+      // how to do useeffect to get new behavioral q
     }
   }
 
