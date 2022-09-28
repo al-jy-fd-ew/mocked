@@ -61,8 +61,8 @@ const Home = () => {
   return (
     <div className='sections'>
       <BehavioralSection renderNext={renderNext} getQuestion={getQuestion} goToNext={goToNext} resetCounter={resetCounter} />
-      { algo && <AlgoSection renderNext={renderNext} getQuestion={getQuestion} goToNext={goToNext}/>}
-      { sysDesign && <SystemDesignSection renderNext={renderNext} getQuestion={getQuestion}/>}
+      { algo && <AlgoSection renderNext={renderNext} getQuestion={getQuestion} goToNext={goToNext} resetCounter={resetCounter}/>}
+      { sysDesign && <SystemDesignSection renderNext={renderNext} getQuestion={getQuestion} resetCounter={resetCounter}/>}
     </div>
   );
 };
