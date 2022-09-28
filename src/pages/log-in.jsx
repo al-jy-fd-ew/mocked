@@ -11,7 +11,20 @@ const Login = () => {
     const userObject = jwt_decode(response.credential);
     console.log(userObject);
     setUser(userObject);
-    navigate('/home');
+
+    const username = userObject.email;
+  
+    // after logging in, make a fetch request to the auth login
+    fetch('/api/authlogin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({username})
+    })
+      .then(res => {
+        res.status === 200 ? navigate('/home') : navigate('/signup');
+      });
   }
 
   useEffect(() => {
