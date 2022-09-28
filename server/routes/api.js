@@ -1,19 +1,27 @@
 const express = require('express');
 const questionController = require('../controllers/questionController');
 const router = express.Router();
-// TODO: import controllers
 
 router.post('/login', )
 // create/signup user
 // sign-in
 
-router.post('/get-question', questionController.getQuestion, questionController.returnRandomQuestion, (req, res) => {
-  return res.status(200).json(res.locals.question);
-});
+router.post('/get-question',
+  questionController.getQuestion, 
+  questionController.returnRandomQuestion, 
+  (req, res) => {
+    return res.status(200).json(res.locals.question);
+  }
+);
 
-router.post('/reset-progress', questionController.resetProgress, questionController.returnRandomQuestion, (req, res) => {
-  return res.status(200).json(res.locals.question);
-});
+router.post('/reset-progress', 
+  questionController.resetProgress, 
+  questionController.getQuestion, 
+  questionController.returnRandomQuestion, 
+  (req, res) => {
+    return res.status(200).json(res.locals.question);
+  }
+);
 
 router.post('/mark-done', questionController.markDone, (req, res) => {
   return res.status(200).end();
