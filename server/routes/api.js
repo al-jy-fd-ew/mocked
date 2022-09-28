@@ -23,14 +23,18 @@ router.post('/get-question',
   }
 );
 
-router.post('/reset-progress', 
-  questionController.resetProgress, 
-  questionController.getQuestion, 
-  questionController.returnRandomQuestion, 
-  (req, res) => {
-    return res.status(200).json(res.locals.question);
-  }
-);
+router.post('/reset-progress', questionController.resetProgress, (req, res) => {
+  return res.status(200).end();
+});
+
+// router.post('/reset-progress', 
+//   questionController.resetProgress, 
+//   questionController.getQuestion, 
+//   questionController.returnRandomQuestion, 
+//   (req, res) => {
+//     return res.status(200).json(res.locals.question);
+//   }
+// );
 
 router.post('/mark-done', questionController.markDone, (req, res) => {
   return res.status(200).end();
