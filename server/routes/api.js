@@ -11,10 +11,8 @@ router.post('/signup', userController.createUser, (req, res) => {
 
 router.post('/login', userController.verifyUser, (req, res) => {
   // if the user successfully logs in, redirect to the home page
-  res.status(200).redirect('/behavioral');
+  res.status(200).redirect('/home');
 });
-
-
 
 
 
