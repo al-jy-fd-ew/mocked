@@ -7,6 +7,8 @@ userController.createUser = (req, res, next) => {
 
   const { username, password } = req.body;
 
+  console.log('req body is: ', req.body);
+
   // if a field is missing, return an error
   if (!username || !password) return next({
     err: 'missing username or password in userController.createUser'
