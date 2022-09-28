@@ -34,6 +34,7 @@ questionController.getQuestion = (req, res, next) => {
 };
 
 questionController.returnRandomQuestion = (_req, res, next) => {
+  console.log('question controller');
   const options = res.locals.questionOptions;
   if (!options.length) {
     res.locals.question = {};

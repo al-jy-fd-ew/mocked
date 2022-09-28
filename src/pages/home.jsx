@@ -22,10 +22,44 @@ const Home = () => {
     }
   }
 
+  function getQuestion(questionType, setAllQuestionsDone, setQuestionId, setPrompt){
+    fetch('/api/get-question', {
+      method: 'POST',
+      body: JSON.stringify({ questionType: questionType }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        if (!Object.keys(data).length) {
+          return setAllQuestionsDone(true);
+        } else {
+          setQuestionId(data._id);
+          setPrompt(data.prompt);
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
+  function goToNext(questionType, questionId, renderNext){
+    fetch('/api/mark-done', {
+      method: 'POST',
+      body: JSON.stringify({ questionType: questionType, questionId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(() => renderNext(questionType))
+      .catch(err => console.log(err));
+  }
+
   return (
     <div className='sections'>
-      <BehavioralSection renderNext={renderNext} />
-      { algo && <AlgoSection renderNext={renderNext}/>}
+      <BehavioralSection renderNext={renderNext} getQuestion={getQuestion} goToNext={goToNext} />
+      { algo && <AlgoSection renderNext={renderNext} getQuestion={getQuestion} goToNext={goToNext}/>}
       { sysDesign && <SystemDesignSection renderNext={renderNext}/>}
     </div>
   );

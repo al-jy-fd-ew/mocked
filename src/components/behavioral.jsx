@@ -2,47 +2,15 @@ import React, { useState, useEffect } from 'react';
 import SkipSection from './skip-section.jsx';
 
 
-const BehavioralSection = ({ renderNext }) => {
+const BehavioralSection = ({ renderNext, getQuestion, goToNext}) => {
 
   const [allQuestionsDone, setAllQuestionsDone] = useState(false);
   const [questionId, setQuestionId] = useState(NaN);
   const [prompt, setPrompt] = useState('');
 
   useEffect(() => {
-    const getQuestion = () => {
-      fetch('/api/get-question', {
-        method: 'POST',
-        body: JSON.stringify({ questionType: 'behavioral' }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (!Object.keys(data).length) {
-            return setAllQuestionsDone(true);
-          } else {
-            setQuestionId(data._id);
-            setPrompt(data.prompt);
-          }
-        })
-        .catch(err => console.log(err));
-    };
-    getQuestion();
-  }
-  , [allQuestionsDone]);
-
-  const markDoneAndProceed = () => {
-    fetch('/api/mark-done', {
-      method: 'POST',
-      body: JSON.stringify({ questionType: 'behavioral', questionId }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(() => renderNext('behavioral'))
-      .catch(err => console.log(err));
-  };
+    getQuestion('behavioral', setAllQuestionsDone, setQuestionId, setPrompt);
+  },[]);
 
   const refreshPage = () => {
     setAllQuestionsDone(false);
@@ -65,7 +33,7 @@ const BehavioralSection = ({ renderNext }) => {
               <br></br>
               {/* <input type='submit' value="Go to the Next Section"></input> */}
             </form>
-            <button className='next-button' onClick={markDoneAndProceed}>Go to next section</button>
+            <button className='next-button' onClick={() => (goToNext('behavioral', questionId, renderNext))}>Go to next section</button>
           </React.Fragment>
       }
     </div>
