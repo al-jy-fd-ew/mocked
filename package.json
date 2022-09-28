@@ -9,17 +9,7 @@
     "server": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/al-jy-fd-ew/mock-interview-app.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/al-jy-fd-ew/mock-interview-app/issues"
-  },
-  "homepage": "https://github.com/al-jy-fd-ew/mock-interview-app#readme",
+  "license": "MIT",
   "dependencies": {
     "@excalidraw/excalidraw": "^0.12.0",
     "babel": "^6.23.0",

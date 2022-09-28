@@ -5,7 +5,6 @@ const userController = require('../controllers/userController');
 
 router.post('/signup', userController.createUser, (req, res) => {
   // after successful sign up, redirect to the login page
-  console.log('signup successful');
   res.redirect('/');
 });
 
