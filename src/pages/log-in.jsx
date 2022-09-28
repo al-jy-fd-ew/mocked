@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { GoogleLogin } from 'react-google-login';
+import jwt_decode from 'jwt-decode';
 
 const Login = () => {
 
-  const clientID = '795937344287-vrtte822003tg70ogjab4t0tucr9e87a.apps.googleusercontent.com';
+  const [ user, setUser ] = useState({});
 
-  const onSuccess = (res) => {
-    console.log('Successful login!');
-  };
+  function handleCallbackResponse(response) {
+    console.log('Encoded JWT ID token: ', response.credential);
+    const userObject = jwt_decode(response.credential);
+    console.log(userObject);
+    setUser(userObject);
+    navigate('/home');
+  }
 
-  const onFailure = (res) => {
-    console.log('Login Failed!');
-  };
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: '1059632627537-4tdm07ce8m3f4gsn5cusmrl2ffce6gom.apps.googleusercontent.com',
+      callback: handleCallbackResponse
+    });
 
+    google.accounts.id.renderButton(
+      document.getElementById('signInDiv'),
+      { theme: 'outline', size: 'large'}
+    );
+  }, []);
 
   const navigate = useNavigate();
 
@@ -51,17 +63,7 @@ const Login = () => {
       <Link to='/signup'>
         <button>Don&apos;t have an account? Sign up here.</button>
       </Link>
-
-      <div id='signInButton'>
-        <GoogleLogin 
-          clientID={clientID}
-          buttonText='Login'
-          onSuccess={onSuccess}
-          onFailure={onFailure}
-          cookiePolicy='single_host_origin'
-          isSignedIn={true}
-        />
-      </div>
+      <div id='signInDiv'></div>
     </div>
   );
 };
