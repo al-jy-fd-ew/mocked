@@ -6,8 +6,7 @@ questionController.getQuestion = (req, res, next) => {
   // retrieves question on database, identifies user by grabbing user_id cookie from browser
   const { questionType } = req.body;
   const { user_id } = req.cookies;
-  console.log('cookies are: ', req.cookies);
-  console.log('user id is: ', user_id);
+
   const query = `
     SELECT
     ${questionType}_questions._id,
@@ -31,7 +30,6 @@ questionController.getQuestion = (req, res, next) => {
 };
 
 questionController.returnRandomQuestion = (_req, res, next) => {
-  console.log('question controller');
   const options = res.locals.questionOptions;
   if (!options.length) {
     // if no more "new" questions for user, return empty object
@@ -42,7 +40,6 @@ questionController.returnRandomQuestion = (_req, res, next) => {
   const randomIndex = Math.floor(Math.random() * options.length);
   // return single question object -- to revisit data shape if returning multiple questions
   res.locals.question = options[randomIndex];
-  console.log('this is the next Q:', res.locals.question);
   return next();
 };
 

@@ -31,9 +31,7 @@ const BehavioralSection = ({ renderNext, getQuestion, goToNext, resetCounter }) 
             <p>{prompt}</p>
             <form>
               <textarea id="behavioral-answer" name="answer" type="text" placeholder="Type out your response here..." style={{height:400, width:600}}></textarea>
-              {/* recorded response? */}
               <br></br>
-              {/* <input type='submit' value="Go to the Next Section"></input> */}
             </form>
             <button className='next-button' onClick={() => (goToNext('behavioral', questionId))}>Go to next section</button>
           </React.Fragment>

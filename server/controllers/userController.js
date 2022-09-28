@@ -3,11 +3,7 @@ const bcrypt = require('bcrypt');
 const db = require('../models/models.js');
 
 userController.createUser = (req, res, next) => {
-  console.log('in userController.createUser');
-
   const { username, password } = req.body;
-
-  console.log('req body is: ', req.body);
 
   // if a field is missing, return an error
   if (!username || !password) return next({
@@ -37,11 +33,7 @@ userController.createUser = (req, res, next) => {
 };
 
 userController.verifyUser = (req, res, next) => {
-  console.log('in userController.verifyUser');
-
   const { username, password } = req.body;
-
-  console.log('req body is: ', req.body);
 
   // if a field is missing, return an error
   if (!username || !password) return next(
@@ -59,7 +51,6 @@ userController.verifyUser = (req, res, next) => {
     .then((response) => {
       // if the username is not in the database, redirect to sign up page
       if (response.rows.length === 0) {
-        console.log('User does not exist in database.');
         return res.status(400).end();
         // if the user IS in the database, check to see if they inputted the correct password
       } else {
@@ -73,7 +64,6 @@ userController.verifyUser = (req, res, next) => {
             }
             res.cookie('user_id', response.rows[0]._id);
             // return next if the user successfully logged in
-            console.log('User successfully logged in');
           }).then(res => {
             return next();
           });
@@ -83,10 +73,7 @@ userController.verifyUser = (req, res, next) => {
 };
 
 userController.authVerifyUser = (req, res, next) => {
-  console.log('in userController.authVerifyUser');
-
   const { username } = req.body;
-
 
   // query to see if username is already in database
   const query1 = `
@@ -104,8 +91,6 @@ userController.authVerifyUser = (req, res, next) => {
 
         db.query(query2, [username])
           .then((response) => {
-            console.log('valid username added to database');
-            console.log('response rows is: ', response.rows[0]);
             res.cookie('user_id', response.rows[0]._id);
             return next();
           })
