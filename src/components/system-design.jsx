@@ -4,10 +4,12 @@ import Whiteboard from './whiteboard.jsx';
 // eslint-disable-next-line import/no-unresolved
 import '/src/whiteboard.scss';
 
-const SystemDesignSection = () => {
+const SystemDesignSection = ({ renderNext }) => {
+  
   const [allQuestionsDone, setAllQuestionsDone] = useState(false);
   const [questionId, setQuestionId] = useState(NaN);
   const [prompt, setPrompt] = useState('');
+  const [interviewDone, setInterviewDone] = useState(false);
 
   useEffect(() => {
     const getQuestion = () => {
@@ -41,11 +43,17 @@ const SystemDesignSection = () => {
         'Content-Type': 'application/json'
       }
     })
+      .then(() => setInterviewDone(true))
       .catch(err => console.log(err));
   };
 
   const refreshPage = () => {
     setAllQuestionsDone(false);
+  };
+
+  const handleReset = () => {
+    renderNext('reset');
+    setInterviewDone(false);
   };
 
   return (
@@ -59,6 +67,12 @@ const SystemDesignSection = () => {
             <p>{prompt}</p>
             <Whiteboard/>
             <button className='next-button' onClick={markDone}>Done!</button>
+            {
+              interviewDone &&
+                <button className='next-button' onClick={handleReset}>
+                  Start new mock interview
+                </button>
+            }
           </React.Fragment>
       }
     </div>
