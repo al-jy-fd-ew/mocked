@@ -1,10 +1,19 @@
 const express = require('express');
 const questionController = require('../controllers/questionController');
 const router = express.Router();
+const userController = require('../controllers/userController');
+const path = require('path');
 
-router.post('/login', )
-// create/signup user
-// sign-in
+
+router.post('/signup', userController.createUser, (req, res) => {
+  // after successful sign up, redirect to the login page
+  res.redirect('/');
+});
+
+router.post('/login', userController.verifyUser, (req, res) => {
+  // if the user successfully logs in, redirect to the home page
+  res.status(200).redirect('/behavioral');
+});
 
 router.post('/get-question',
   questionController.getQuestion, 
@@ -45,10 +54,10 @@ router.post('/mark-done', questionController.markDone, (req, res) => {
 // get questions
 
 // middlewares: 
-  // pullQuestion
-    // query to get not previously done questions
-    // randomly pick one to send to FE
-  // registerAssocation
-    // take in userId from user session + id of question they just finished
+// pullQuestion
+// query to get not previously done questions
+// randomly pick one to send to FE
+// registerAssocation
+// take in userId from user session + id of question they just finished
 
 module.exports = router;
