@@ -1,21 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-
-// const sampleQuestions = [
-//   'Tell me about a time when you performed well under enormous pressure.',
-//   'Tell me about a time you had a conflict at work.',
-//   'Can you detail a mistake you made and how you reacted to it?',
-//   'Have you ever had a disagreement with an immediate supervisor?',
-//   'Describe a time when you went above and beyond.',
-// ]; // array for now but we can turn into object later to store questions keys in our database
-
-// function getRandomInt() {
-//   return Math.floor(Math.random() * 5);
-// }
-// useEffect to retrieve question
-
-// onSubmit -> post request to server
-
+import SkipSection from './skip-section.jsx';
 
 
 const BehavioralSection = ({ renderNext }) => {
@@ -46,9 +30,9 @@ const BehavioralSection = ({ renderNext }) => {
     };
     getQuestion();
   }
-  , []);
+  , [allQuestionsDone]);
 
-  const goToNext = () => {
+  const markDoneAndProceed = () => {
     fetch('/api/mark-done', {
       method: 'POST',
       body: JSON.stringify({ questionType: 'behavioral', questionId }),
@@ -60,6 +44,9 @@ const BehavioralSection = ({ renderNext }) => {
       .catch(err => console.log(err));
   };
 
+  const refreshPage = () => {
+    setAllQuestionsDone(false);
+  };
 
   return (
     <div className='sections'>
@@ -68,13 +55,7 @@ const BehavioralSection = ({ renderNext }) => {
       <h3>Behavioral Question</h3>
       { 
         allQuestionsDone ?
-          <React.Fragment>
-            <p>Congratulations! Our records show that you have completed all questions in this section.</p>
-            <br />
-            <p>Would you like to reset your progress and receive a random question to practice?</p>
-            <button className='next-button'>Reset Progress</button>
-            <button className='next-button'>Skip to Next Section</button>
-          </React.Fragment>
+          <SkipSection section={'behavioral'} refreshPage={refreshPage} renderNext={renderNext}/>
           :
           <React.Fragment>
             <p>{prompt}</p>
@@ -84,7 +65,7 @@ const BehavioralSection = ({ renderNext }) => {
               <br></br>
               {/* <input type='submit' value="Go to the Next Section"></input> */}
             </form>
-            <button className='next-button' onClick={goToNext}>Go to next section</button>
+            <button className='next-button' onClick={markDoneAndProceed}>Go to next section</button>
           </React.Fragment>
       }
     </div>
