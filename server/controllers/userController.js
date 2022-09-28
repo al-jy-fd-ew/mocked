@@ -24,7 +24,7 @@ userController.createUser = (req, res, next) => {
   // insert the new user into the database
   db.query(query, [username, hash])
     .then((response) => {
-      console.log('in this block');
+      // console.log('in this block');
       // in the future, do something with the new users id - TODO
       return next();
     })
@@ -42,6 +42,8 @@ userController.verifyUser = (req, res, next) => {
   console.log('in userController.verifyUser');
 
   const { username, password } = req.body;
+
+  console.log('req body is: ', req.body);
 
   // if a field is missing, return an error
   if (!username || !password) return next(
@@ -74,6 +76,7 @@ userController.verifyUser = (req, res, next) => {
             res.cookie('user_id', response.rows[0]._id);
             // return next if the user successfully logged in
             console.log('User successfully logged in');
+          }).then(res => {
             return next();
           });
       }

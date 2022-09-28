@@ -6,6 +6,8 @@ questionController.getQuestion = (req, res, next) => {
   // retrieves question on database, identifies user by grabbing user_id cookie from browser
   const { questionType } = req.body;
   const { user_id } = req.cookies;
+  console.log('cookies are: ', req.cookies);
+  console.log('user id is: ', user_id);
   const query = `
     SELECT
     ${questionType}_questions._id,
@@ -16,7 +18,7 @@ questionController.getQuestion = (req, res, next) => {
     ON
     ${questionType}_questions._id = userFilterTable.${questionType}_question_id
     WHERE ${questionType}_question_id is null; 
-    `; 
+    `;
   db.query(query)
     .then((result) => {
       res.locals.questionOptions = result.rows;
@@ -36,7 +38,7 @@ questionController.returnRandomQuestion = (_req, res, next) => {
     // front end to check for empty object and offer options to reset progress or skip section
     res.locals.question = {};
     return next();
-  } 
+  }
   const randomIndex = Math.floor(Math.random() * options.length);
   // return single question object -- to revisit data shape if returning multiple questions
   res.locals.question = options[randomIndex];

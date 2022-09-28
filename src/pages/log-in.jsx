@@ -32,11 +32,11 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const username = document.getElementsByClassName('username').value;
-    const password = document.getElementsByClassName('password').value;
+    const username = document.getElementById('loginUN').value;
+    const password = document.getElementById('loginPW').value;
 
-    document.getElementsByClassName('username').value = '';
-    document.getElementsByClassName('password').value = '';
+    document.getElementById('loginUN').value = '';
+    document.getElementById('loginPW').value = '';
 
     fetch('/api/login', {
       method: 'POST',
@@ -45,7 +45,7 @@ const Login = () => {
       },
       body: JSON.stringify({username, password})
     })
-      .then(navigate('/home'));
+      .then(setTimeout(() => navigate('/home'), 500));
   };
 
   return (
@@ -55,9 +55,9 @@ const Login = () => {
       <h3>Log In</h3>
       <form method='POST' onSubmit={handleSubmit}>
         <p>Username</p>
-        <input className='username' name='username' type='text'></input>
+        <input className='username' id='loginUN' name='username' type='text'></input>
         <p>Password</p>
-        <input className='password' name='password' type='password'></input>
+        <input className='password' id='loginPW' name='password' type='password'></input>
         <input className='submit' type='submit' value='Login'></input>
       </form>
       <p>Don&apos;t have an account?</p>

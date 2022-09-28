@@ -5,19 +5,19 @@ const userController = require('../controllers/userController');
 
 router.post('/signup', userController.createUser, (req, res) => {
   // after successful sign up, redirect to the login page
-  console.log('singup successful');
+  console.log('signup successful');
   res.redirect('/');
 });
 
 router.post('/login', userController.verifyUser, (req, res) => {
   // if the user successfully logs in, redirect to the home page
-  res.status(200).redirect('/home');
+  res.status(200).end();
 });
 
 // run middleware to get set of questions and randomly return one to render
 router.post('/get-question',
-  questionController.getQuestion, 
-  questionController.returnRandomQuestion, 
+  questionController.getQuestion,
+  questionController.returnRandomQuestion,
   (req, res) => {
     return res.status(200).json(res.locals.question);
   }
