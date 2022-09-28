@@ -24,6 +24,7 @@ userController.createUser = (req, res, next) => {
   // insert the new user into the database
   db.query(query, [username, hash])
     .then((response) => {
+      console.log('in this block');
       // in the future, do something with the new users id - TODO
       return next();
     })
