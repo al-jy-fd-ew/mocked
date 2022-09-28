@@ -5,23 +5,13 @@ import SystemDesignSection from '../components/system-design.jsx';
 // eslint-disable-next-line import/no-unresolved
 import '/src/whiteboard.scss';
 
-// boolean flag state to conditionally render algo and sysdesign once user progresses (1 each)
-// pass down handler cb to flip the flag to true
-
 const Home = () => {
+
   const [algo, setAlgo] = useState(false);
   const [sysDesign, setSysDesign] = useState(false);
+  const [resetCounter, setResetCounter] = useState(0);
 
-  function renderNext(currSection) {
-    if (currSection === 'behavioral') setAlgo(true);
-    if (currSection === 'algo') setSysDesign(true);
-    if (currSection === 'reset') {
-      setAlgo(false);
-      setSysDesign(false);
-      // how to do useeffect to get new behavioral q
-    }
-  }
-
+  // retrieves question from db. If all questions have been answered by user trigger setAllQuestionsDone state change
   function getQuestion(questionType, setAllQuestionsDone, setQuestionId, setPrompt){
     fetch('/api/get-question', {
       method: 'POST',
@@ -44,7 +34,19 @@ const Home = () => {
       .catch(err => console.log(err));
   }
 
-  function goToNext(questionType, questionId, renderNext){
+  // renders next question section upon user clicking next section button
+  function renderNext(currSection) {
+    if (currSection === 'behavioral') setAlgo(true);
+    if (currSection === 'algorithm') setSysDesign(true);
+    if (currSection === 'reset') {
+      setAlgo(false);
+      setSysDesign(false);
+      setResetCounter(prev => prev + 1);
+    }
+  }
+
+  // mark question as done by user and render next interview section
+  function goToNext(questionType, questionId){
     fetch('/api/mark-done', {
       method: 'POST',
       body: JSON.stringify({ questionType: questionType, questionId }),
@@ -58,9 +60,9 @@ const Home = () => {
 
   return (
     <div className='sections'>
-      <BehavioralSection renderNext={renderNext} getQuestion={getQuestion} goToNext={goToNext} />
+      <BehavioralSection renderNext={renderNext} getQuestion={getQuestion} goToNext={goToNext} resetCounter={resetCounter} />
       { algo && <AlgoSection renderNext={renderNext} getQuestion={getQuestion} goToNext={goToNext}/>}
-      { sysDesign && <SystemDesignSection renderNext={renderNext}/>}
+      { sysDesign && <SystemDesignSection renderNext={renderNext} getQuestion={getQuestion}/>}
     </div>
   );
 };

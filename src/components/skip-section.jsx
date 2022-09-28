@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-const SkipSection = ({ section, refreshPage, renderNext }) => {
+const SkipSection = ({ section, resetProgress, renderNext }) => {
   const [showOptions, setShowOptions] = useState(true);
 
+  // reset database based on userId and current question section
   const handleReset = () => {
     fetch('/api/reset-progress', {
       method: 'POST',
@@ -11,10 +12,11 @@ const SkipSection = ({ section, refreshPage, renderNext }) => {
         'Content-Type': 'application/json'
       }
     })
-      .then(() => refreshPage())
+      .then(() => resetProgress())
       .catch(err => console.log(err));
   };
 
+  // option for user to skip section and not reset progress in database
   const handleSkip = () => {
     setShowOptions(false);
     renderNext(section);

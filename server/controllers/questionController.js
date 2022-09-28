@@ -3,12 +3,7 @@ const db = require('../models/models.js');
 const questionController = {};
 
 questionController.getQuestion = (req, res, next) => {
-  
-  // req.body.userID
-  // req.body.questionType
-  // behavioral questions -> public.user_behavioral_questions
-  // public.behavioral_questions (get filtered [] of questions)
-  // error handling: if user has done all questions (empty [])
+  // retrieves question on database, identifies user by grabbing user_id cookie from browser
   const { questionType } = req.body;
   const { user_id } = req.cookies;
   const query = `
@@ -37,14 +32,13 @@ questionController.returnRandomQuestion = (_req, res, next) => {
   console.log('question controller');
   const options = res.locals.questionOptions;
   if (!options.length) {
+    // if no more "new" questions for user, return empty object
+    // front end to check for empty object and offer options to reset progress or skip section
     res.locals.question = {};
-    // return empty obj; front end will check for empty and render buttons
-    // 2 options: 1. reroll question (wipe associations)
-    // 2. skip section (another post request to get question, but for next section)
     return next();
   } 
   const randomIndex = Math.floor(Math.random() * options.length);
-  // return single question object -- tbd if need to reformat for FE (or consider [] of obj)
+  // return single question object -- to revisit data shape if returning multiple questions
   res.locals.question = options[randomIndex];
   console.log('this is the next Q:', res.locals.question);
   return next();

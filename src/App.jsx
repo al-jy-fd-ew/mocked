@@ -14,7 +14,6 @@ import { gapi } from 'gapi-script';
 
 const clientID = '795937344287-vrtte822003tg70ogjab4t0tucr9e87a.apps.googleusercontent.com';
 
-
 const App = () => {
 
   useEffect(() => {

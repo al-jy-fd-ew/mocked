@@ -2,8 +2,6 @@ const express = require('express');
 const questionController = require('../controllers/questionController');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const path = require('path');
-
 
 router.post('/signup', userController.createUser, (req, res) => {
   // after successful sign up, redirect to the login page
@@ -16,6 +14,7 @@ router.post('/login', userController.verifyUser, (req, res) => {
   res.status(200).redirect('/home');
 });
 
+// run middleware to get set of questions and randomly return one to render
 router.post('/get-question',
   questionController.getQuestion, 
   questionController.returnRandomQuestion, 
@@ -24,48 +23,15 @@ router.post('/get-question',
   }
 );
 
+// resets user progress in a particular section by clearing records in association table
 router.post('/reset-progress', questionController.resetProgress, (req, res) => {
   return res.status(200).end();
 });
 
-// router.post('/reset-progress', 
-//   questionController.resetProgress, 
-//   questionController.getQuestion, 
-//   questionController.returnRandomQuestion, 
-//   (req, res) => {
-//     return res.status(200).json(res.locals.question);
-//   }
-// );
-
+// add association between user and question they just finished
 router.post('/mark-done', questionController.markDone, (req, res) => {
   return res.status(200).end();
 });
 
-// req body: userId, questionType (i.e. behavioral)
-
-
-
-// create/signup user
-// sign-in
-// pull behavioral question (via button click 'start interview'?)
-// next section from behavioral
-  // pull leetcode question
-  // register association user <-> behavioral
-// next section from leetcode
-  // pull sys design question
-  // register association user <-> leetcode
-// finish sys design question
-  // register association user <-> sysdesign
-
-// return questions, format tbd (one object); 
-
-// get questions
-
-// middlewares: 
-// pullQuestion
-// query to get not previously done questions
-// randomly pick one to send to FE
-// registerAssocation
-// take in userId from user session + id of question they just finished
 
 module.exports = router;
