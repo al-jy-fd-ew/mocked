@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 // require routers
 const apiRouter = require('./routes/api.js');
 
@@ -11,6 +12,7 @@ const app = express();
 // Express middleware
 app.use(express.json()); // recognize incoming request as Json Object
 app.use(express.urlencoded({ extended: true })); // parse incoming string or array request
+app.use(cookieParser());
 
 // serve static assets
 app.use('/src', express.static(path.resolve(__dirname, '../src')));

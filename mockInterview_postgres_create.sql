@@ -45,7 +45,7 @@ CREATE TABLE public.behavioral_questions(
   OIDS=FALSE
 );
 
-CREATE TABLE public.users_algorithms(
+CREATE TABLE public.users_algorithm_questions(
 	"user_id" int NOT NULL,
   "algorithm_question_id" int NOT NULL,
   CONSTRAINT "users_fk" FOREIGN KEY ("user_id") REFERENCES public.users("_id"),
@@ -63,7 +63,7 @@ CREATE TABLE public.users_design_questions(
   OIDS=FALSE
 );
 
-CREATE TABLE public.user_behavioral_questions (
+CREATE TABLE public.users_behavioral_questions (
 	"user_id" serial NOT NULL,
   "behavioral_question_id" int NOT NULL,
   CONSTRAINT "users_fk" FOREIGN KEY ("user_id") REFERENCES public.users("_id"),
