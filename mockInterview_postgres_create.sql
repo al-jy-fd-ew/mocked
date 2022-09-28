@@ -29,10 +29,10 @@ CREATE TABLE public.algorithm_questions(
 );
 
 
-CREATE TABLE public.system_design_questions(
+CREATE TABLE public.design_questions(
 	"_id" serial NOT NULL,
   "prompt" varchar NOT NULL,
-  CONSTRAINT "system_design_questions_pk" PRIMARY KEY ("_id")
+  CONSTRAINT "design_questions_pk" PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
 );
@@ -56,9 +56,9 @@ CREATE TABLE public.users_algorithm_questions(
 
 CREATE TABLE public.users_design_questions(
 	"user_id" int NOT NULL,
-  "system_design_question_id" int NOT NULL,
+  "design_question_id" int NOT NULL,
   CONSTRAINT "users_fk" FOREIGN KEY ("user_id") REFERENCES public.users("_id"),
-  CONSTRAINT "design_questions_fk" FOREIGN KEY ("system_design_question_id") REFERENCES public.system_design_questions("_id")
+  CONSTRAINT "design_questions_fk" FOREIGN KEY ("design_question_id") REFERENCES public.design_questions("_id")
 ) WITH (
   OIDS=FALSE
 );
@@ -277,14 +277,14 @@ Constraints:
 
 -231 <= x <= 231 - 1');
 
-INSERT INTO public.system_design_questions ("prompt") VALUES ('How would you design Twitter?');
-INSERT INTO public.system_design_questions ("prompt") VALUES ('How would you design Instagram?');
-INSERT INTO public.system_design_questions ("prompt") VALUES ('How would you design Amazon.com?');
-INSERT INTO public.system_design_questions ("prompt") VALUES ('How would you design Netflix?');
-INSERT INTO public.system_design_questions ("prompt") VALUES ('How would you design TikTok?');
-INSERT INTO public.system_design_questions ("prompt") VALUES ('How would you design a web crawler?');
-INSERT INTO public.system_design_questions ("prompt") VALUES ('How would you design Dropbox?');
-INSERT INTO public.system_design_questions ("prompt") VALUES ('How would you design a URL shortening service?');
-INSERT INTO public.system_design_questions ("prompt") VALUES ('How would you design Facebook Messenger?');
-INSERT INTO public.system_design_questions ("prompt") VALUES ('How would you design Yelp?');
+INSERT INTO public.design_questions ("prompt") VALUES ('How would you design Twitter?');
+INSERT INTO public.design_questions ("prompt") VALUES ('How would you design Instagram?');
+INSERT INTO public.design_questions ("prompt") VALUES ('How would you design Amazon.com?');
+INSERT INTO public.design_questions ("prompt") VALUES ('How would you design Netflix?');
+INSERT INTO public.design_questions ("prompt") VALUES ('How would you design TikTok?');
+INSERT INTO public.design_questions ("prompt") VALUES ('How would you design a web crawler?');
+INSERT INTO public.design_questions ("prompt") VALUES ('How would you design Dropbox?');
+INSERT INTO public.design_questions ("prompt") VALUES ('How would you design a URL shortening service?');
+INSERT INTO public.design_questions ("prompt") VALUES ('How would you design Facebook Messenger?');
+INSERT INTO public.design_questions ("prompt") VALUES ('How would you design Yelp?');
 
