@@ -7,6 +7,7 @@ const path = require('path');
 
 router.post('/signup', userController.createUser, (req, res) => {
   // after successful sign up, redirect to the login page
+  console.log('singup successful');
   res.redirect('/');
 });
 

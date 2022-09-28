@@ -1,6 +1,5 @@
 const db = require('../models/models.js');
 
-
 const questionController = {};
 
 // req body will have userId + type of question (string)
@@ -12,16 +11,16 @@ questionController.getQuestion = (req, res, next) => {
   // behavioral questions -> public.user_behavioral_questions
   // public.behavioral_questions (get filtered [] of questions)
   // error handling: if user has done all questions (empty [])
-  console.log(req.body);
+
   const { questionType } = req.body;
-  const { userId } = req.cookies;
+  const { user_id } = req.cookies;
   const query = `
     SELECT
     ${questionType}_questions._id,
     ${questionType}_questions.prompt
     FROM ${questionType}_questions
     LEFT JOIN
-    (SELECT ${questionType}_question_id FROM users_${questionType}_questions WHERE user_id = ${userId}) AS userFilterTable
+    (SELECT ${questionType}_question_id FROM users_${questionType}_questions WHERE user_id = ${user_id}) AS userFilterTable
     ON
     ${questionType}_questions._id = userFilterTable.${questionType}_question_id
     WHERE ${questionType}_question_id is null; 
@@ -38,6 +37,7 @@ questionController.getQuestion = (req, res, next) => {
 };
 
 questionController.returnRandomQuestion = (_req, res, next) => {
+  console.log('question controller');
   const options = res.locals.questionOptions;
   if (!options.length) {
     res.locals.question = {};
