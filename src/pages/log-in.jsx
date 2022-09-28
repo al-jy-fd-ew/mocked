@@ -45,7 +45,9 @@ const Login = () => {
       },
       body: JSON.stringify({username, password})
     })
-      .then(setTimeout(() => navigate('/home'), 500));
+      .then(res => {
+        res.status === 200 ? navigate('/home') : navigate('/signup');
+      });
   };
 
   return (

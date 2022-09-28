@@ -62,7 +62,7 @@ userController.verifyUser = (req, res, next) => {
       // if the username is not in the database, redirect to sign up page
       if (response.rows.length === 0) {
         console.log('User does not exist in database.');
-        res.redirect('/signup');
+        return res.status(400).end();
         // if the user IS in the database, check to see if they inputted the correct password
       } else {
         bcrypt.compare(password, response.rows[0].password)
