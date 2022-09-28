@@ -4,7 +4,7 @@ import Whiteboard from './whiteboard.jsx';
 // eslint-disable-next-line import/no-unresolved
 import '/src/whiteboard.scss';
 
-const SystemDesignSection = ({ renderNext, getQuestion }) => {
+const SystemDesignSection = ({ renderNext, getQuestion, resetCounter }) => {
   
   const [allQuestionsDone, setAllQuestionsDone] = useState(false);
   const [questionId, setQuestionId] = useState(NaN);
@@ -48,7 +48,7 @@ const SystemDesignSection = ({ renderNext, getQuestion }) => {
       {
         allQuestionsDone ? 
           <React.Fragment>
-            <SkipSection section={'design'} resetProgress={resetProgress}/> 
+            <SkipSection section={'design'} resetProgress={resetProgress} resetCounter={resetCounter}/> 
             <button className='next-button' onClick={handleReset}>
               Start new mock interview
             </button>

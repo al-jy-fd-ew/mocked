@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const SkipSection = ({ section, resetProgress, renderNext }) => {
+const SkipSection = ({ section, resetProgress, renderNext, resetCounter }) => {
   const [showOptions, setShowOptions] = useState(true);
+
+  useEffect(() => {
+    setShowOptions(true);
+  },[resetCounter]);
 
   // reset database based on userId and current question section
   const handleReset = () => {

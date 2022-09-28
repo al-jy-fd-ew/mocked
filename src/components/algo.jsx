@@ -5,7 +5,7 @@ import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
 
-const AlgoSection = ( { renderNext, getQuestion, goToNext }) => {
+const AlgoSection = ( { renderNext, getQuestion, goToNext, resetCounter }) => {
 
   const [allQuestionsDone, setAllQuestionsDone] = useState(false);
   const [questionId, setQuestionId] = useState(NaN);
@@ -27,7 +27,7 @@ const AlgoSection = ( { renderNext, getQuestion, goToNext }) => {
       <p>{prompt}</p>
       {
         allQuestionsDone ?
-          <SkipSection section={'algorithm'} resetProgress={resetProgress} renderNext={renderNext} />
+          <SkipSection section={'algorithm'} resetProgress={resetProgress} renderNext={renderNext} resetCounter={resetCounter} />
           :
           <React.Fragment>
             <AceEditor

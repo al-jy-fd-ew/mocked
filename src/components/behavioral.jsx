@@ -10,9 +10,15 @@ const BehavioralSection = ({ renderNext, getQuestion, goToNext, resetCounter }) 
 
   // get new question to render for user
   // will trigger on first load, when user resets progress, and when user starts new interview
-  useEffect(() => {
-    getQuestion('behavioral', setAllQuestionsDone, setQuestionId, setPrompt);
+  async function resetSection () {
+    await getQuestion('behavioral', setAllQuestionsDone, setQuestionId, setPrompt);
     document.getElementById('behavioral-answer').value = '';
+  }
+
+  useEffect(() => {
+    // getQuestion('behavioral', setAllQuestionsDone, setQuestionId, setPrompt);
+    // document.getElementById('behavioral-answer').value = '';
+    resetSection();
   },[allQuestionsDone, resetCounter]);
 
   const resetProgress = () => {
@@ -25,7 +31,7 @@ const BehavioralSection = ({ renderNext, getQuestion, goToNext, resetCounter }) 
       <h3>Behavioral Question</h3>
       { 
         allQuestionsDone ?
-          <SkipSection section={'behavioral'} resetProgress={resetProgress} renderNext={renderNext}/>
+          <SkipSection section={'behavioral'} resetProgress={resetProgress} renderNext={renderNext} resetCounter={resetCounter}/>
           :
           <React.Fragment>
             <p>{prompt}</p>
