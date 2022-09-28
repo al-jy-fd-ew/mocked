@@ -12,7 +12,7 @@ router.post('/signup', userController.createUser, (req, res) => {
 
 router.post('/login', userController.verifyUser, (req, res) => {
   // if the user successfully logs in, redirect to the home page
-  res.status(200).redirect('/');
+  res.status(200).redirect('/home');
 });
 
 router.post('/get-question',
@@ -38,8 +38,11 @@ router.post('/mark-done', questionController.markDone, (req, res) => {
 
 // req body: userId, questionType (i.e. behavioral)
 
-// initial section (passed in user_id)
-  // pull behavioral question (via button click 'start interview'?)
+
+
+// create/signup user
+// sign-in
+// pull behavioral question (via button click 'start interview'?)
 // next section from behavioral
   // pull leetcode question
   // register association user <-> behavioral
