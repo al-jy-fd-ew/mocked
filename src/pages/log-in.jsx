@@ -1,30 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { GoogleLogin } from 'react-google-login';
+import jwt_decode from 'jwt-decode';
 
 const Login = () => {
 
-  const clientID = '795937344287-vrtte822003tg70ogjab4t0tucr9e87a.apps.googleusercontent.com';
+  const [ user, setUser ] = useState({});
 
-  const onSuccess = (res) => {
-    console.log('Successful login!');
-  };
+  function handleCallbackResponse(response) {
+    console.log('Encoded JWT ID token: ', response.credential);
+    const userObject = jwt_decode(response.credential);
+    console.log(userObject);
+    setUser(userObject);
+    navigate('/home');
+  }
 
-  const onFailure = (res) => {
-    console.log('Login Failed!');
-  };
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: '1059632627537-4tdm07ce8m3f4gsn5cusmrl2ffce6gom.apps.googleusercontent.com',
+      callback: handleCallbackResponse
+    });
 
+    google.accounts.id.renderButton(
+      document.getElementById('signInDiv'),
+      { theme: 'outline', size: 'large'}
+    );
+  }, []);
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const username = document.getElementsByClassName('username').value;
+    const password = document.getElementsByClassName('password').value;
 
-    document.getElementById('username').value = '';
-    document.getElementById('password').value = '';
+    document.getElementsByClassName('username').value = '';
+    document.getElementsByClassName('password').value = '';
 
     fetch('/api/login', {
       method: 'POST',
@@ -38,30 +50,22 @@ const Login = () => {
 
   return (
 
-    <div id='login'>
+    <div className='credentials'>
       <h1>Mock Interview App</h1>
       <h3>Log In</h3>
       <form method='POST' onSubmit={handleSubmit}>
-        <input id='username' name='username' type='text' placeholder='Username'></input>
-        <br></br>
-        <input id='password' name='password' type='password' placeholder='Password'></input>
-        <br></br>
-        <input type='submit' value='Login'></input>
+        <p>Username</p>
+        <input className='username' name='username' type='text'></input>
+        <p>Password</p>
+        <input className='password' name='password' type='password'></input>
+        <input className='submit' type='submit' value='Login'></input>
       </form>
+      <p>Don&apos;t have an account?</p>
       <Link to='/signup'>
-        <button>Don&apos;t have an account? Sign up here.</button>
+        <button>Sign Up</button>
       </Link>
-
-      <div id='signInButton'>
-        <GoogleLogin 
-          clientID={clientID}
-          buttonText='Login'
-          onSuccess={onSuccess}
-          onFailure={onFailure}
-          cookiePolicy='single_host_origin'
-          isSignedIn={true}
-        />
-      </div>
+      <hr />
+      <div id='signInDiv'></div>
     </div>
   );
 };
