@@ -1,4 +1,4 @@
-# Mock Interview App
+# Mocked
 
 Have an interview coming up but can't find a partner to practice with?
 
