@@ -2,7 +2,7 @@
 
 Have an interview coming up but can't find a partner to practice with?
 
-Use our Mock Interview App to simulate real interviews as many times as you
+Use Mocked to simulate real interviews as many times as you
 want!
 
 <hr>
